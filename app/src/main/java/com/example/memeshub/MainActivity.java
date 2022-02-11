@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton downloadButton;
     private ProgressBar progressBar;
     private String get_meme_url;
+    private String[] permissions = new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    private int RC = 22;
 
 
     @Override
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setUpWidgets();
         VerifyPermission_INTERNET_ACCESS();
-        VerifyPermission_EXTERNAL_STORAGE();
+
         loadMeme();
 
         /* Buttons: */
@@ -129,21 +131,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* Permission For External Storage: */
-    private Boolean VerifyPermission_EXTERNAL_STORAGE() {
 
-        // This will return the current Status
-        int permissionExternalMemory = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    private void askPermissions(){
+        ActivityCompat.requestPermissions(MainActivity.this, permissions, RC);
+    }
 
-        if (permissionExternalMemory != PackageManager.PERMISSION_GRANTED) {
-
-            String[] STORAGE_PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            // If permission not granted then ask for permission real time.
-            ActivityCompat.requestPermissions(this, STORAGE_PERMISSIONS, 1);
-            return false;
+    private boolean isPermissionsGranted(){
+        for (String permission : permissions){
+            if(ActivityCompat.checkSelfPermission(MainActivity.this,permission) != PackageManager.PERMISSION_GRANTED){
+                return false;
+            }
         }
-
         return true;
-
     }
 
     /* Load a Meme in an ImageView: */
@@ -225,8 +224,8 @@ public class MainActivity extends AppCompatActivity {
     /* Download a Meme: */
     private void downloadMeme(String meme_url) {
 
-        if (!VerifyPermission_EXTERNAL_STORAGE()) {
-            return;
+        if (!isPermissionsGranted()) {
+            askPermissions();
         }
 
         final File Dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
