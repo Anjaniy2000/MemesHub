@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (successDirCreated) {
             File imageFile = new File(storageDir, imageFileName);
-            String savedImagePath = imageFile.getAbsolutePath();
+//            String savedImagePath = imageFile.getAbsolutePath();
             try {
                 OutputStream fOut = new FileOutputStream(imageFile);
                 image.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
@@ -286,7 +286,6 @@ public class MainActivity extends AppCompatActivity {
                 String msg = "Error While Downloading An Image!";
                 int duration = Snackbar.LENGTH_SHORT;
                 showSnackBar(view,msg,duration);
-
                 e.printStackTrace();
             }
 
