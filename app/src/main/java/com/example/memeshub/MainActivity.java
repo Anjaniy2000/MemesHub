@@ -31,12 +31,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     /* Verifying Permissions: */
 
     /* Permission For Internet Access: */
-    private Boolean VerifyPermission_INTERNET_ACCESS() {
+    private void VerifyPermission_INTERNET_ACCESS() {
 
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
@@ -125,13 +122,10 @@ public class MainActivity extends AppCompatActivity {
         if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
             Toast.makeText(getApplicationContext(), "No Internet Connection!!!!!", Toast.LENGTH_LONG).show();
             noInternet_ExceptionHandler();
-            return false;
         }
-        return true;
     }
 
     /* Permission For External Storage: */
-
     private void askPermissions(){
         ActivityCompat.requestPermissions(MainActivity.this, permissions, RC);
     }
@@ -224,10 +218,6 @@ public class MainActivity extends AppCompatActivity {
     /* Download a Meme: */
     private void downloadMeme(String meme_url) {
 
-        if (!isPermissionsGranted()) {
-            askPermissions();
-        }
-
         final File Dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 + "/MemesHub_DOWNLOADS");
 
@@ -266,6 +256,10 @@ public class MainActivity extends AppCompatActivity {
     private void saveImage(Bitmap image, File storageDir, String imageFileName){
 
         boolean successDirCreated = true;
+
+        if (!isPermissionsGranted()) {
+            askPermissions();
+        }
 
         if (!storageDir.exists()) {
             successDirCreated = storageDir.mkdir();
@@ -380,8 +374,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId() == R.id.downloads){
-            Intent intent = new Intent(getApplicationContext(),DownloadLibrary.class);
-            startActivity(intent);
+            if (!isPermissionsGranted()) {
+                askPermissions();
+            }
+            else{
+                Intent intent = new Intent(getApplicationContext(),DownloadLibrary.class);
+                startActivity(intent);
+            }
+
         }
 
         if(item.getItemId() == R.id.about_app){
