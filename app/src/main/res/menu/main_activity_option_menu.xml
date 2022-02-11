@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group>
+
+        <item
+            android:id="@+id/downloads"
+            android:title="Downloads"
+            app:showAsAction="always"
+            android:icon="@drawable/ic_photo_library_black_24dp"
+            />
+
+        <item android:id="@+id/about_app"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            app:showAsAction="always"
+            android:title="About App">
+        </item>
+
+    </group>
+
+</menu>

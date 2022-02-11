@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        app:title="@string/app_name"
+        android:theme="@style/Toolbar_Theme"
+        app:titleTextColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary">
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="20">
+
+        <ImageView
+            android:id="@+id/meme_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/progress_bar_meme"
+            android:visibility="visible"
+            app:layout_constraintLeft_toLeftOf="@id/meme_image_view"
+            app:layout_constraintRight_toRightOf="@id/meme_image_view"
+            app:layout_constraintBottom_toBottomOf="@id/meme_image_view"
+            app:layout_constraintTop_toTopOf="@id/meme_image_view"></ProgressBar>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="80">
+
+        <Button
+            android:id="@+id/share"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/download"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:layout_toLeftOf="@id/download"
+            android:background="@drawable/button_square"
+            android:fontFamily="serif-monospace"
+            android:text="SHARE"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"></Button>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/download"
+            android:src="@drawable/ic_file_download_black_24dp"
+            android:background="@drawable/button_round"></ImageButton>
+
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@id/download"
+            android:background="@drawable/button_square"
+            android:fontFamily="serif-monospace"
+            android:text="NEXT"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"></Button>
+
+    </RelativeLayout>
+
+</LinearLayout>
