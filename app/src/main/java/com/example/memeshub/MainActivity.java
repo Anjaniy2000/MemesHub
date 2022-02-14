@@ -20,6 +20,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
                             get_meme_url = response.getString("url");
+                            Log.e("URL", get_meme_url);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -212,7 +214,16 @@ public class MainActivity extends AppCompatActivity {
 
     /* Working Of Download Button: */
     private void downloadButton_Task() {
-        downloadMeme(get_meme_url);
+        String temp = get_meme_url.substring(get_meme_url.lastIndexOf('.') + 1);
+        Log.e("TEMP", temp);
+
+        if(temp.equalsIgnoreCase("gif")){
+            Toast.makeText(MainActivity.this, "Unable To Download", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            downloadMeme(get_meme_url);
+        }
+
     }
 
     /* Download a Meme: */
