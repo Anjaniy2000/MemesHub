@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
     /* Working Of Download Button: */
     private void downloadButton_Task() {
         String temp = get_meme_url.substring(get_meme_url.lastIndexOf('.') + 1);
-        Log.e("TEMP", temp);
+//        Log.e("TEMP", temp);
 
         if(temp.equalsIgnoreCase("gif")){
             Toast.makeText(MainActivity.this, "Unable To Download", Toast.LENGTH_SHORT).show();
