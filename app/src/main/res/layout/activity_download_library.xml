@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".DownloadLibrary">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbar_1"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:title="Downloads"
-        app:titleTextColor="@color/colorPrimaryDark"
-        android:background="@color/colorPrimary">
+        app:titleTextColor="@color/colorPrimaryDark">
     </androidx.appcompat.widget.Toolbar>
 
-    <GridView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="3"
-        android:layout_marginTop="2dp"
-        android:columnWidth="128dp"
-        android:verticalSpacing="4dp"
+        android:layout_height="wrap_content"
+        android:text="@string/noDownloads"
+        app:layout_constraintBottom_toBottomOf="@+id/PhoneImageGrid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:gravity="center"
+        android:textSize="18sp"
+        android:id="@+id/noDownloads"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="serif-monospace"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_1">
+    </TextView>
+
+    <GridView
+        android:id="@+id/PhoneImageGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnWidth="128dp"
+        android:gravity="center"
+        android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:id="@+id/PhoneImageGrid">
+        android:verticalSpacing="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_1">
     </GridView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

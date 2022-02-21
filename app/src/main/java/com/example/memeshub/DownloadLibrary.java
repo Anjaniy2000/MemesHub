@@ -14,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class DownloadLibrary extends AppCompatActivity {
 
     private GridView gridView;
     private ArrayList<File> files_list;
+    private TextView noDownloads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class DownloadLibrary extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(arrow -> onBackPressed());
+
+        noDownloads = (TextView)findViewById(R.id.noDownloads);
+        if(!files_list.isEmpty()){
+            noDownloads.setVisibility(View.GONE);
+        }
     }
 
     /* Final Task: */
