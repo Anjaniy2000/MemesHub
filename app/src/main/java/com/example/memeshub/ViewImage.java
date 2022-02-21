@@ -88,15 +88,20 @@ public class ViewImage extends AppCompatActivity {
 
         if(item.getItemId() == R.id.share_this_meme){
 
+//            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+//            Uri screenshotUri = Uri.parse(file_url);
+////            try {
+////                InputStream stream = getContentResolver().openInputStream(screenshotUri);
+////            } catch (FileNotFoundException e) {
+////                e.printStackTrace();
+////            }
+//            sharingIntent.setType("image/jpeg");
+//            sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+//            startActivity(Intent.createChooser(sharingIntent, "Share This Meme Using:"));
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-            Uri screenshotUri = Uri.parse(file_url);
-            try {
-                InputStream stream = getContentResolver().openInputStream(screenshotUri);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            sharingIntent.setType("image/jpeg");
-            sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+            Uri imageUri = Uri.parse(file_url);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
             startActivity(Intent.createChooser(sharingIntent, "Share This Meme Using:"));
 
         }

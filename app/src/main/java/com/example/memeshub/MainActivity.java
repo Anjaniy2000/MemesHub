@@ -220,9 +220,9 @@ public class MainActivity extends AppCompatActivity {
     private void shareButton_Task() {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         Uri imageUri = Uri.parse(get_meme_url);
-        sharingIntent.setType("image/png/jpg/jpeg/gif");
+        sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-        startActivity(sharingIntent);
+        startActivity(Intent.createChooser(sharingIntent, "Share This Meme Using:"));
     }
 
     /* Working Of Next Button: */
