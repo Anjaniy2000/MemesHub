@@ -100,7 +100,7 @@ public class ViewImage extends AppCompatActivity {
 //            startActivity(Intent.createChooser(sharingIntent, "Share This Meme Using:"));
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             Uri imageUri = Uri.parse(file_url);
-            sharingIntent.setType("text/plain");
+            sharingIntent.setType("image/*");
             sharingIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
             startActivity(Intent.createChooser(sharingIntent, "Share This Meme Using:"));
 
