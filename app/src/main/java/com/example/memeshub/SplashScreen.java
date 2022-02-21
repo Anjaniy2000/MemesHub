@@ -8,8 +8,6 @@ import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private Timer timer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
     /* Working Of Splash Screen: */
     private void splashScreen_Task() {
 
-        timer = new Timer();
+        Timer timer = new Timer();
 
         timer.schedule(new TimerTask() {
             @Override

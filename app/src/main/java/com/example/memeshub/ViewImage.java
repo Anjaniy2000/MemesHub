@@ -23,11 +23,12 @@ import com.bumptech.glide.request.target.Target;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Objects;
 
 //Get A Full View Of Downloaded Meme:
 public class ViewImage extends AppCompatActivity {
 
-    private ImageView imageView;
+    private ImageView viewImage;
     private String file_url;
 
     @Override
@@ -49,7 +50,7 @@ public class ViewImage extends AppCompatActivity {
     /* Setting Up Widgets Which Were Defined In ViewImage XML File: */
     private void setUpWidgets() {
 
-        imageView = (ImageView)findViewById(R.id.view_image);
+        viewImage = (ImageView)findViewById(R.id.view_image);
 
         Glide.with(getApplicationContext()).load(file_url).addListener(new RequestListener<Drawable>() {
             @Override
@@ -62,12 +63,12 @@ public class ViewImage extends AppCompatActivity {
             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                 return false;
             }
-        }).into(imageView);
+        }).into(viewImage);
 
         //ToolBar Setup:
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_2);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(arrow -> onBackPressed());
 
     }

@@ -1,5 +1,6 @@
 package com.example.memeshub.SingleTon;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -8,8 +9,10 @@ import com.android.volley.toolbox.Volley;
 
 /* Implementation Of SingleTon Class Pattern For API - Calling: */
 public class MySingleTon {
+    @SuppressLint("StaticFieldLeak")
     private static MySingleTon instance;
     private RequestQueue requestQueue;
+    @SuppressLint("StaticFieldLeak")
     private static Context ctx;
 
     /*  Constructor: */
