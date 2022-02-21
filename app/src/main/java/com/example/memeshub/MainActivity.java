@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -46,9 +47,16 @@ import com.example.memeshub.SingleTon.MySingleTon;
 import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton downloadButton;
     private ProgressBar progressBar;
     private String get_meme_url;
-    private String[] permissions = new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-    private int RC = 22;
+    private final String[] permissions = new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    private final int RC = 22;
 
 
     @Override
@@ -100,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
 
     /* Setting Up Widgets Which Were Defined In Activity_Main XML File: */
     private void setUpWidgets() {
-        shareButton = (Button)findViewById(R.id.share);
-        nextButton = (Button)findViewById(R.id.next);
-        downloadButton = (ImageButton)findViewById(R.id.download);
-        memeImage = (ImageView)findViewById(R.id.meme_image_view);
-        progressBar = (ProgressBar)findViewById(R.id.progress_bar_meme);
+        shareButton = findViewById(R.id.share);
+        nextButton = findViewById(R.id.next);
+        downloadButton = findViewById(R.id.download);
+        memeImage = findViewById(R.id.meme_image_view);
+        progressBar = findViewById(R.id.progress_bar_meme);
 
         //CUSTOM - TOOLBAR: -
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
     }
@@ -166,25 +174,28 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        Glide.with(getApplicationContext()).load(get_meme_url).addListener(new RequestListener<Drawable>() {
-                            @Override
-                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                progressBar.setVisibility(View.GONE);
-                                View view = findViewById(R.id.next);
-                                String msg = "Failed To Load :(";
-                                int duration = Snackbar.LENGTH_SHORT;
-                                showSnackBar(view,msg,duration);
-                                return false;
-                            }
+                        if(get_meme_url.substring(get_meme_url.lastIndexOf('.') + 1).equalsIgnoreCase("gif")){
+                            loadMeme();
+                        }
+                        else{
+                            Glide.with(getApplicationContext()).load(get_meme_url).addListener(new RequestListener<Drawable>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    progressBar.setVisibility(View.GONE);
+                                    View view = findViewById(R.id.next);
+                                    String msg = "Failed To Load :(";
+                                    int duration = Snackbar.LENGTH_SHORT;
+                                    showSnackBar(view,msg,duration);
+                                    return false;
+                                }
 
-                            @Override
-                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                progressBar.setVisibility(View.GONE);
-                                return false;
-                            }
-                        }).into(memeImage);
-
-
+                                @Override
+                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                    progressBar.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            }).into(memeImage);
+                        }
                     }
 
                 }, new Response.ErrorListener() {
@@ -203,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
     private void shareButton_Task() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        Intent chooser = intent.createChooser(intent,"Share This Meme Using:");
+        Intent chooser = Intent.createChooser(intent,"Share This Meme Using:");
         startActivity(chooser);
     }
 
@@ -213,21 +224,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* Working Of Download Button: */
-    private void downloadButton_Task() {
-        String temp = get_meme_url.substring(get_meme_url.lastIndexOf('.') + 1);
-//        Log.e("TEMP", temp);
-
-        if(temp.equalsIgnoreCase("gif")){
-            Toast.makeText(MainActivity.this, "Unable To Download", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            downloadMeme(get_meme_url);
-        }
-
+    private void downloadButton_Task(){
+            downloadMemeWithoutGif(get_meme_url);
     }
 
-    /* Download a Meme: */
-    private void downloadMeme(String meme_url) {
+    /* Download a Meme Without Gif: */
+    private void downloadMemeWithoutGif(String meme_url) {
 
         final File Dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 + "/MemesHub_DOWNLOADS");
@@ -326,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
 //        snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
         View view_2 = snackbar.getView();
         view_2.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        TextView textView = (TextView) view_2.findViewById(R.id.snackbar_text);
+        TextView textView = view_2.findViewById(R.id.snackbar_text);
         textView.setTextColor(Color.YELLOW);
 
         snackbar.show();
