@@ -238,17 +238,17 @@ public class MainActivity extends AppCompatActivity {
         //If Image Is In .Gif Format:
         if(temp.equalsIgnoreCase("gif")){
 //            Toast.makeText(MainActivity.this, "Unable To Download", Toast.LENGTH_SHORT).show();
-            downloadMemeWithGif(get_meme_url);
+            downloadMemeGif(get_meme_url);
         }
         //If Image Is In Other Formats(.jpg, .jpeg, .png):
         else{
-            downloadMemeWithoutGif(get_meme_url);
+            downloadMemeExceptGif(get_meme_url);
         }
 
     }
 
-    /* Download a Meme Without Gif: */
-    private void downloadMemeWithoutGif(String meme_url) {
+    /* Download a Meme Except Gif: */
+    private void downloadMemeExceptGif(String meme_url) {
 
         final File Dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 + "/MemesHub_DOWNLOADS");
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* Download a Meme With Gif: */
-    private void downloadMemeWithGif(String meme_url) throws IOException {
+    private void downloadMemeGif(String meme_url) throws IOException {
         final File Dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 + "/MemesHub_DOWNLOADS");
         final String fileName = meme_url.substring(meme_url.lastIndexOf('/') + 1);
@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
                 }).submit();
     }
 
-    /* Save Memes on External Storage(Without Gif): */
+    /* Save Memes on External Storage(Except Gif): */
     private void saveImage(Bitmap image, File storageDir, String imageFileName){
 
         boolean successDirCreated = true;

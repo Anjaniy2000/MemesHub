@@ -2,6 +2,8 @@ package com.example.memeshub;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DownloadLibrary extends AppCompatActivity {
 
@@ -51,7 +54,7 @@ public class DownloadLibrary extends AppCompatActivity {
         //CUSTOM - TOOLBAR: -
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_1);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(arrow -> onBackPressed());
 
         noDownloads = (TextView)findViewById(R.id.noDownloads);
@@ -118,6 +121,7 @@ public class DownloadLibrary extends AppCompatActivity {
             return 0;
         }
 
+        @SuppressLint("ViewHolder")
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 

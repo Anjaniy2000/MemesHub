@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,21 +10,11 @@
         android:id="@+id/imageView_splash_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/logo"></ImageView>
+        android:src="@mipmap/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </ImageView>
 
-<!--    <TextView-->
-<!--        android:id="@+id/textView_splash_screen"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/imageView_splash_screen"-->
-<!--        android:fontFamily="serif-monospace"-->
-<!--        android:gravity="center"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_centerVertical="true"-->
-<!--        android:text="@string/app_name"-->
-<!--        android:textColor="@color/colorPrimary"-->
-<!--        android:textSize="30sp"-->
-<!--        android:textStyle="bold" />-->
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

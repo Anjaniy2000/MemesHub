@@ -151,7 +151,7 @@ public class ViewImage extends AppCompatActivity {
 
             //CREATING A DIALOG-BOX: -
             AlertDialog alertDialog = builder.create();
-            //SET TITLE MAUALLY: -
+            //SET TITLE MANUALLY: -
             alertDialog.setTitle("Delete");
             alertDialog.show();
 

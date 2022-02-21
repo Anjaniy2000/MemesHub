@@ -5,8 +5,11 @@
 Download And Share The Funny Memes from Reddit Among Friends &amp; Family.</string>
 
     <string name="about_developer">Designed And Developed By : Anjaniy Salekar</string>
+    <string name="downloads">Downloads</string>
+    <string name="fullView">Full View</string>
     <string name="noDownloads">No Downloads Available!</string>
     <string name="shareButton">SHARE</string>
     <string name="nextButton">NEXT</string>
+    <string name="imagebutton">ImageButton</string>
 
 </resources>
