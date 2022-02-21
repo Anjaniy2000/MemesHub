@@ -81,7 +81,7 @@ public class DownloadLibrary extends AppCompatActivity {
             }
 
             else {
-                if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith(".png") || files[i].getName().endsWith(".jpeg")){
+                if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith(".png") || files[i].getName().endsWith(".jpeg") || files[i].getName().endsWith(".gif")){
                     temp.add(files[i]);
                 }
             }
