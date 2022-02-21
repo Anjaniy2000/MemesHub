@@ -497,8 +497,25 @@ public class MainActivity extends AppCompatActivity {
                 askPermissions();
             }
             else{
-                Intent intent = new Intent(getApplicationContext(),DownloadLibrary.class);
-                startActivity(intent);
+                final File Dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                        + "/MemesHub_DOWNLOADS");
+
+                boolean successDirCreated = true;
+
+                if (!Dir.exists()) {
+                    successDirCreated = Dir.mkdir();
+                }
+
+                if(successDirCreated){
+                    Intent intent = new Intent(getApplicationContext(),DownloadLibrary.class);
+                    startActivity(intent);
+                }
+                else {
+                    View view = findViewById(R.id.download);
+                    String msg = "Failed To Make Folder/Directory!";
+                    int duration = Snackbar.LENGTH_SHORT;
+                    showSnackBar(view, msg, duration);
+                }
             }
 
         }
