@@ -24,7 +24,7 @@ public class AboutApp extends AppCompatActivity {
     private void activitySetup() {
 
         Element versionElement = new Element();
-        versionElement.setTitle("Version 2.0");
+        versionElement.setTitle("Version 1.0");
 
         View aboutPage = new AboutPage(this)
                 .isRTL(false)

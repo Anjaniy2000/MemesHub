@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +23,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.Objects;
 
 //Get A Full View Of Downloaded Meme:
@@ -86,24 +86,20 @@ public class ViewImage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId() == R.id.share_this_meme){
+         if(item.getItemId() == R.id.share_this_meme){
 
-//            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-//            Uri screenshotUri = Uri.parse(file_url);
-////            try {
-////                InputStream stream = getContentResolver().openInputStream(screenshotUri);
-////            } catch (FileNotFoundException e) {
-////                e.printStackTrace();
-////            }
-//            sharingIntent.setType("image/jpeg");
-//            sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-//            startActivity(Intent.createChooser(sharingIntent, "Share This Meme Using:"));
-            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-            Uri imageUri = Uri.parse(file_url);
-            sharingIntent.setType("image/*");
-            sharingIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-            startActivity(Intent.createChooser(sharingIntent, "Share This Meme Using:"));
+             String path = null;
+             try {
+                 path = MediaStore.Images.Media.insertImage(getContentResolver(), file_url, "Image Description", null);
+             } catch (FileNotFoundException e) {
+                 e.printStackTrace();
+             }
+             Uri uri = Uri.parse(path);
 
+             Intent intent = new Intent(Intent.ACTION_SEND);
+             intent.setType("image/*");
+             intent.putExtra(Intent.EXTRA_STREAM, uri);
+             startActivity(Intent.createChooser(intent, "Share This Meme Using:"));
         }
 
         if(item.getItemId() == R.id.delete){

@@ -70,7 +70,7 @@ public class DownloadLibrary extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startActivity(new Intent(getApplicationContext(),ViewImage.class).putExtra("img",files_list.get(position).toString()));
+                startActivity(new Intent(getApplicationContext(),ViewImage.class).putExtra("img",files_list.get(position).getAbsolutePath().toString()));
 
 
             }

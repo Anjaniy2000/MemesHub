@@ -232,11 +232,11 @@ public class MainActivity extends AppCompatActivity {
 
     /* Working Of Download Button: */
     private void downloadButton_Task() throws IOException {
-        String temp = get_meme_url.substring(get_meme_url.lastIndexOf('.') + 1);
+        String fileExtension = get_meme_url.substring(get_meme_url.lastIndexOf('.') + 1);
 //        Log.e("TEMP", temp);
 
         //If Image Is In .Gif Format:
-        if(temp.equalsIgnoreCase("gif")){
+        if(fileExtension.equalsIgnoreCase("gif")){
 //            Toast.makeText(MainActivity.this, "Unable To Download", Toast.LENGTH_SHORT).show();
             downloadMemeGif(get_meme_url);
         }
