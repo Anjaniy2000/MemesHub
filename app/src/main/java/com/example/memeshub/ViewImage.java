@@ -28,7 +28,7 @@ import java.util.Objects;
 //Get A Full View Of Downloaded Meme:
 public class ViewImage extends AppCompatActivity {
 
-    private ImageView viewImage;
+    private ImageView imageView;
     private String file_url;
 
     @Override
@@ -50,7 +50,7 @@ public class ViewImage extends AppCompatActivity {
     /* Setting Up Widgets Which Were Defined In ViewImage XML File: */
     private void setUpWidgets() {
 
-        viewImage = (ImageView)findViewById(R.id.view_image);
+        imageView = findViewById(R.id.view_image);
 
         Glide.with(getApplicationContext()).load(file_url).addListener(new RequestListener<Drawable>() {
             @Override
@@ -63,10 +63,10 @@ public class ViewImage extends AppCompatActivity {
             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                 return false;
             }
-        }).into(viewImage);
+        }).into(imageView);
 
         //ToolBar Setup:
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_2);
+        Toolbar toolbar = findViewById(R.id.toolbar_2);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(arrow -> onBackPressed());
@@ -112,37 +112,30 @@ public class ViewImage extends AppCompatActivity {
                     .setCancelable(false)
 
                     //CODE FOR POSITIVE(YES) BUTTON: -
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        //ACTION FOR "YES" BUTTON: -
+                        File file = new File(file_url);
+                        if (file.exists()) {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //ACTION FOR "YES" BUTTON: -
-                            File file = new File(file_url);
-                            if (file.exists()) {
+                            file.delete();
 
-                                file.delete();
+                            Toast.makeText(getApplicationContext(), "Successfully Deleted!", Toast.LENGTH_LONG).show();
 
-                                Toast.makeText(getApplicationContext(), "Successfully Deleted!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), DownloadLibrary.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
 
-                                Intent intent = new Intent(getApplicationContext(), DownloadLibrary.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                            }
-
-                            else {
-                                Toast.makeText(getApplicationContext(),"Deletion Failed!",Toast.LENGTH_SHORT).show();
-                            }
+                        else {
+                            Toast.makeText(getApplicationContext(),"Deletion Failed!",Toast.LENGTH_SHORT).show();
                         }
                     })
 
                     //CODE FOR NEGATIVE(NO) BUTTON: -
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //ACTION FOR "NO" BUTTON: -
-                            dialog.cancel();
+                    .setNegativeButton("No", (dialog, which) -> {
+                        //ACTION FOR "NO" BUTTON: -
+                        dialog.cancel();
 
-                        }
                     });
 
             //CREATING A DIALOG-BOX: -
