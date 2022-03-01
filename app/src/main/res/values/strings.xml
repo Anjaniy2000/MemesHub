@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Memes Hub</string>
 
-    <string name="about_app">A Fully Featured Meme Sharing Android Application Which Help Us To
-Download And Share The Funny Memes from Reddit Among Friends &amp; Family.</string>
+    <string name="about_app">MemesHub is a fully featured meme sharing android application which help us to
+download and share the funny memes from reddit among the friends &amp; family.</string>
 
     <string name="about_developer">Designed And Developed By : Anjaniy Salekar</string>
     <string name="downloads">Downloads</string>
