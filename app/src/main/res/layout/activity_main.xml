@@ -55,7 +55,7 @@
 
         <Button
             android:id="@+id/share"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignStart="@id/download"
             android:layout_alignParentStart="true"
@@ -72,23 +72,22 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:textColor="@android:color/black"
             android:textSize="24sp"
-            android:textStyle="bold">
-        </Button>
+            android:textStyle="bold"></Button>
 
         <ImageButton
             android:id="@+id/download"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@drawable/button_round"
-            android:src="@drawable/ic_file_download_black_24dp"
-            android:contentDescription="@string/imagebutton">
+            android:contentDescription="@string/imagebutton"
+            android:src="@drawable/ic_file_download_black_24dp">
         </ImageButton>
 
 
         <Button
             android:id="@+id/next"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
