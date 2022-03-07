@@ -5,5 +5,5 @@
         android:angle="270">
     </gradient>
     <solid android:color="@color/colorPrimary" />
-    <corners android:radius="16sp" />
+    <corners android:radius="8dp" />
 </shape>
