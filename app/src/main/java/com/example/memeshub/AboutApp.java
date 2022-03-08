@@ -32,6 +32,7 @@ public class AboutApp extends AppCompatActivity {
                 .setDescription(getString(R.string.about_app))
                 .addItem(versionElement)
                 .addEmail("anjaniy01salekar@gmail.com")
+                .addPlayStore("com.anjaniy.memeshub")
                 .addGitHub("Anjaniy2000/MemesHub")
                 .create();
 

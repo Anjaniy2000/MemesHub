@@ -105,10 +105,33 @@ public class MainActivity extends AppCompatActivity {
         downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    downloadButton_Task();
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                if (!isPermissionsGranted()) {
+                    askPermissions();
+                }
+                else{
+                    final File Dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                            + "/MemesHub_DOWNLOADS");
+
+                    boolean successDirCreated = true;
+
+                    if (!Dir.exists()) {
+                        successDirCreated = Dir.mkdir();
+                    }
+
+                    if(successDirCreated){
+                        try {
+                            downloadButton_Task();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        View view_temp = findViewById(R.id.download);
+                        String msg = "Failed To Make Folder/Directory!";
+                        int duration = Snackbar.LENGTH_SHORT;
+                        showSnackBar(view_temp, msg, duration);
+                    }
                 }
             }
         });
